@@ -28,3 +28,9 @@ DATA = {
 #     'ингредиент2': количество2,
 #   }
 # }
+def index(request, dish):
+    servings = int(request.GET.get("servings", 1))
+    context = {
+       'recipe': {k: v*servings for (k, v) in DATA.get(dish, {}).items()}
+     }
+    return render(request, 'calculator/index.html', context)
